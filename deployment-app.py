@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import flask
-import pickle
+import pickle, joblib
 from flask import request
 
 ### Initialize webapp
@@ -54,12 +54,9 @@ def predict():
                                veil_color, ring_number, ring_type, spore_print_color, population, habitat], dtype = np.int64)
         
         input_array = input_array.reshape(1, -1)
-        print(input_array.shape)
-        print(input_array)
-        print(input_array.dtype)
-        print(pickle.format_version)
+     
         
-        model = pickle.load(open('SVC model.pkl', 'rb'))
+        model = joblib.load(open('SVC Pipe.gz', 'rb'))
         
         predictions = model.predict(input_array)[0]
         
